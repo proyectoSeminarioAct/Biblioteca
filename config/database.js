@@ -1,14 +1,12 @@
 require("dotenv").config()
 const Sequelize =require("sequelize");
 
-const sequelize = new Sequelize(
-  process.env.PG_BD, // db name,
-  process.env.PG_USER, // username
-  process.env.PG_PASS, // password
+module.exports = sequelize = new Sequelize(
+  process.env.PG_BD, 
+  process.env.PG_USER,
+  process.env.PG_PASS,
   {
     host: process.env.PG_HOST,
     dialect: "postgres",
   }
 )
-
-module.exports = sequelize

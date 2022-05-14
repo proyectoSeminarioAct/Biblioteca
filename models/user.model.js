@@ -1,7 +1,7 @@
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const {sequelize} = require('../config/database.js')
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/database.js')
 
-const Users = sequelize.define('users', {
+module.exports = User = sequelize.define('users', {
     usr_id:{
         type: DataTypes.INTEGER,
         autoIncrement: true
@@ -43,4 +43,4 @@ const Users = sequelize.define('users', {
 (async () => {
     await sequelize.sync({ force: true });
     // Code here
-  })();
+})();
