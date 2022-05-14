@@ -4,7 +4,6 @@ const cors = require("cors")
 const bp = require('body-parser')
 const swaggerUI =  require("swagger-ui-express")
 const swaggerJSDoc = require("swagger-jsdoc")
-const client = require('./config/postgres.js')
 const sequelize = require('./config/database.js')
 const swaggerSpec = require('./config/swagger.js')
 const usersRoutes = require('./routes/users.routes.js')
@@ -24,6 +23,7 @@ app.use(usersRoutes)
 app.use(rolesRoutes)
 
 
+// Iniciar app
 const port = process.env.port
 app.listen(port, () => {
     console.log(`http://localhost:${port}`);
@@ -31,7 +31,7 @@ app.listen(port, () => {
 })
 
 
-// Validar coneccion a base de datos
+// Validar conexion a base de datos
 async function connectsequelize() {
     try {
         await sequelize.authenticate();
@@ -40,18 +40,5 @@ async function connectsequelize() {
         console.error('Unable to connect to the database:', error);
     }
 }
-
-
-/*client.connect();
-
-app.get('/users', (req, res)=>{
-    client.query(`Select * from users`, (err, result)=>{
-        if(!err){
-            res.send(result.rows);
-        }
-    });
-    client.end;
-})*/
-
 
 
