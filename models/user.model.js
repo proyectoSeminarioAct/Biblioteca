@@ -40,7 +40,7 @@ module.exports = User = sequelize.define('users', {
     }
 );
 
-(async () => {
+/*(async () => {
     await sequelize.sync({ force: true });
     // Code here
-})();
+})();*/

@@ -1,28 +1,39 @@
-const Users = require('../models/user.model.js')
+const User = require('../models/user.model.js')
 
-const getUsers = (req, res) => {
-    res.send('get users')
+async function getUsers(req, res) {
+    try {
+        const users = await User.findAll()
+        console.log(users);
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
 
-async function createUsers (req, res) {
+async function createUsers(req, res) {
 
-    const {usr_login, usr_pass, usr_name, usr_lastname, usr_state, usr_type, usr_identify, usr_type_identify, fk_usr_rol} = req.body
-    
-    const newUser = await Users.create({
-        usr_login,
-        usr_pass,
-        usr_name,
-        usr_lastname,
-        usr_state,
-        usr_type,
-        usr_identify,
-        usr_type_identify,
-        fk_usr_rol
-    })
+    const { usr_login, usr_pass, usr_name, usr_lastname, usr_state, usr_type, usr_identify, usr_type_identify, fk_usr_rol } = req.body
 
-    console.log(newUser)
-    
-    res.send('create users')
+    try {
+        const newUser = await User.create({
+            usr_login,
+            usr_pass,
+            usr_name,
+            usr_lastname,
+            usr_state,
+            usr_type,
+            usr_identify,
+            usr_type_identify,
+            fk_usr_rol
+        })
+
+        console.log(newUser);
+
+        res.json(newUser);
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
 }
 
-module.exports = {createUsers,getUsers}
+module.exports = { createUsers, getUsers }
